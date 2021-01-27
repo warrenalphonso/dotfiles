@@ -1,0 +1,198 @@
+#!/usr/bin/env bash
+
+# Shell prompt based on the Solarized Dark theme. 
+# Mostly copied from: https://github.com/alrra/dotfiles
+# Some bits and pieces from: https://github.com/mathiasbynens/dotfiles 
+
+##############################################################################
+
+enable_color_support() {
+    if [[ $COLORTERM == gnome-* && $TERM == xterm ]] \
+        && infocmp gnome-256color &> /dev/null; then
+        export TERM="gnome-256color"
+    elif infocmp xterm-256color &> /dev/null; then
+        export TERM="xterm-256color"
+    fi
+}
+
+# Command line in git repos show helpful info
+get_git_repository_details() {
+    local branchName=""
+    local tmp=""
+
+    # Check if the current directory is in a Git repository.
+    git rev-parse &>/dev/null || return
+
+    # Check if in `.git/` directory (some of the following
+    # checks don't make sense/won't work in the `.git` directory).
+    [ "$(git rev-parse --is-inside-git-dir)" == "false" ] || return
+
+    # Check for what branch we’re on.
+    # Get the short symbolic ref. If HEAD isn’t a symbolic ref, get a
+    # tracking remote branch or tag. Otherwise, get the
+    # short SHA for the latest commit, or give up.
+    branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
+	    git describe --all --exact-match HEAD 2> /dev/null || \
+	    git rev-parse --short HEAD 2> /dev/null || \
+	    echo '(unknown)')"
+
+    # Check for uncommitted changes in the index.
+    if ! git diff --quiet --ignore-submodules --cached; then
+        tmp+="+"
+    fi
+
+    # Check for unstaged changes.
+    if ! git diff-files --quiet --ignore-submodules --; then
+	tmp+="!"
+    fi
+
+    # Check for untracked files.
+    if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+	tmp+="?"
+    fi
+
+    # Check for stashed files.
+    if git rev-parse --verify refs/stash &>/dev/null; then
+	tmp+="$"
+    fi
+
+    # Prepend a space if tmp has non-zero length
+    [ -n "$tmp" ] && tmp=" [$tmp]"
+
+    echo -e "${1}${branchName}${2}${tmp}"
+}
+
+set_prompts() {
+    # Get colors 
+    local bold=""
+    local reset=""
+
+    local black="" # Unused
+    local blue=""
+    local cyan="" # Unused 
+    local green=""
+    local orange=""
+    local purple="" # Unused
+    local red=""
+    local violet=""
+    local white=""
+    local yellow=""
+
+    local userStyle=""
+    local hostStyle=""
+
+    if tput setaf 1 &> /dev/null; then
+	tput sgr0; # reset colors
+	bold=$(tput bold);
+	reset=$(tput sgr0);
+	# Solarized colors, taken from http://git.io/solarized-colors.
+	black=$(tput setaf 0);
+	blue=$(tput setaf 33);
+	cyan=$(tput setaf 37);
+	green=$(tput setaf 64);
+	orange=$(tput setaf 166);
+	purple=$(tput setaf 125);
+	red=$(tput setaf 124);
+	violet=$(tput setaf 61);
+	white=$(tput setaf 15);
+	yellow=$(tput setaf 136);
+    else
+	bold='';
+	reset="\e[0m";
+	black="\e[1;30m";
+	blue="\e[1;34m";
+	cyan="\e[1;36m";
+	green="\e[1;32m";
+	orange="\e[1;33m";
+	purple="\e[1;35m";
+	red="\e[1;31m";
+	violet="\e[1;35m";
+	white="\e[1;37m";
+	yellow="\e[1;33m";
+    fi;
+
+    # Highlight the user name when logged in as root.
+    if [[ "${USER}" == "root" ]]; then
+        userStyle="${red}"
+    else
+        userStyle="${orange}"
+    fi;
+
+    # Highlight the hostname when connected via SSH.
+    if [[ "${SSH_TTY}" ]]; then
+        hostStyle="${bold}${red}"
+    else
+        hostStyle="${yellow}"
+    fi;
+
+    # Prompt Statement variables. See: http://ss64.com/bash/syntax-prompt.html
+    # PS1 is the default interactive prompt and the one we see the most often. 
+    # PS2, PS3, and PS4 also exist, but I haven't customized these; I just 
+    # copied from: https://github.com/alrra/dotfiles
+
+    # | PS1 - Default interactive prompt
+    PS1="\[\033]0;\W\007\]" # Terminal title and prompt 
+    PS1+="$reset$bold\n"    # Newline
+    PS1+="$userStyle\u"     # Username
+    PS1+="$white @ "
+    PS1+="$hostStyle\h"     # Host
+    PS1+="$white in "
+    PS1+="$green\w"         # Working directory full path 
+    PS1+="\$(get_git_repository_details \"$white on $violet\" \"$blue\")"
+    PS1+="\n"
+    PS1+="\[$reset\]\[$white\]\$ \[$reset\]"
+    export PS1
+
+    # | PS2 - Continuation interactive prompt
+    PS2="⚡ "
+    export PS2
+
+    # | PS4 - Debug prompt
+    # e.g:
+    #
+    # The GNU `date` command has the `%N` interpreted sequence while
+    # other implementations don't (on macOS `gdate` can be used instead
+    # of the native `date` if the `coreutils` package has been installed).
+    #
+    # local dateCmd=""
+    #
+    # if [ "$(date +%N)" != "N" ] || \
+    #    [ ! -x "$(command -v "gdate")" ]; then
+    #    dateCmd="date +%s.%N"
+    # else
+    #    dateCmd="gdate +%s.%N"
+    # fi
+    #
+    # PS4="+$( tput cr && tput cuf 6 &&
+    #          printf "$yellow %s $green%6s $reset" "$($dateCmd)" "[$LINENO]" )"
+    #
+    # PS4 output:
+    #
+    #   ++    1357074705.875970000  [123] '[' 1 == 0 ']'
+    #   └──┬─┘└────┬───┘ └───┬───┘ └──┬─┘ └──────┬─────┘
+    #      │       │         │        │          │
+    #      │       │         │        │          └─ command
+    #      │       │         │        └─ line number
+    #      │       │         └─ nanoseconds
+    #      │       └─ seconds since 1970-01-01 00:00:00 UTC
+    #      └─ depth-level of the subshell
+    PS4="+$( tput cr 2> /dev/null;
+             tput cuf 6 2> /dev/null;
+             printf "%s" "$reset" )"
+    export PS4
+}
+
+main() {
+    enable_color_support
+    set_prompts
+}
+
+main
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Cleanup.
+
+unset -f enable_color_support
+unset -f main
+unset -f set_prompts
