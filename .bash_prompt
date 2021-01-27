@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
+###############################################################################
+# See top of .bashrc for usage instructions and overview. 
 # Shell prompt based on the Solarized Dark theme. 
 # Mostly copied from: https://github.com/alrra/dotfiles
 # Some bits and pieces from: https://github.com/mathiasbynens/dotfiles 
 
-##############################################################################
+############################################################################### 
 
 enable_color_support() {
     if [[ $COLORTERM == gnome-* && $TERM == xterm ]] \
@@ -189,8 +191,7 @@ main() {
 
 main
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+###############################################################################
 # Cleanup.
 
 unset -f enable_color_support

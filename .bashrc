@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+###############################################################################
+# Usage 
+# Remove existing .bashrc, .bash_profile, .bash_prompt, and .vimrc files. 
+# Clone on a new computer: 
+#   $ git clone --bare https://github.com/warrenalphonso/dotfiles.git $HOME/.dotfiles
+# Define alias: 
+#   $ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# Checkout repo to $HOME: 
+#   $ dotfiles checkout
+
+###############################################################################
+# Overview 
+# 
 # A Unix shell is a command-line interpreter for Unix-like operating systems. 
 # Bash is a popular Unix shell. 
 # 
@@ -40,10 +53,10 @@
 # Set up
 
 # Make terminal look pretty
-if \[ -f ~/.bash_prompt \]; then 
-    source ~/.bash_prompt
+if \[ -f $HOME/.bash_prompt \]; then 
+    source $HOME/.bash_prompt
 else 
-    echo Cannot find ~/.bash_prompt file!
+    echo Cannot find $HOME/.bash_prompt file!
 fi
 
 # Mac or Linux? See: https://stackoverflow.com/a/3466183/13697995
@@ -116,7 +129,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 ###############################################################################
 # Track dotfiles with Git 
 
-# dotfiles points to ~/.dotfiles Git repo 
+# dotfiles points to $HOME/.dotfiles Git repo 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 ###############################################################################
@@ -127,10 +140,10 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # we source it from .bash_profile) because other scripts might overwrite the 
 # settings it needs, such as `PROMPT_COMMAND`. 
 # See: https://iterm2.com/documentation-shell-integration.html
-if \[ -f ~/.iterm2_shell_integration.bash \]; then 
-    source ~/.iterm2_shell_integration.bash
+if \[ -f $HOME/.iterm2_shell_integration.bash \]; then 
+    source $HOME/.iterm2_shell_integration.bash
 elif \[ $machine == "Mac" \]; then 
-    echo "Cannot find ~/.iterm2_shell_integration.bash! \
+    echo "Cannot find $HOME/.iterm2_shell_integration.bash! \
 	See: https://iterm2.com/documentation-shell-integration.html"
 fi
 
