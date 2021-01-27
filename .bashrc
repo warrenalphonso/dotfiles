@@ -96,14 +96,34 @@ unset option
 if \[ $machine == "Mac" \] && which brew &> /dev/null \
 	&& [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
     # Ensure existing Homebrew v1 completions continue to work
-    export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d";
-    source "$(brew --prefix)/etc/profile.d/bash_completion.sh";
+    export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
+    source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 elif [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion;
-fi;
+    source /etc/bash_completion
+fi
 
 ###############################################################################
 # Python Setup 
+# 
+# MacOS (currently) ships with Python 2.7 (`python` alias) and XCode ships with 
+# Python 3.9 (`python3` alias). We don't want to rely on these because they'll 
+# change with system updates!
+# 
+# We'll use pyenv to manage Python versions. 
+# For setup, see: https://github.com/pyenv/pyenv/wiki
+#
+# With pyenv, we can easily install and switch between different Python versions. 
+# We can set a global Python version with: pyenv global 3.9.1 , or we can set
+# a local Python version for the current directory with: pyenv local 3.9.1
+# 
+# See pyenv commands here: https://github.com/pyenv/pyenv/blob/master/COMMANDS.md
+# For Jupyter notebook, do: pip install ipykernel and brew install jupyter
+
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+else 
+    echo pyenv is not installed!
+fi
 
 ###############################################################################
 # Rust Setup 
@@ -130,7 +150,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 # Track dotfiles with Git 
 
 # dotfiles points to $HOME/.dotfiles Git repo 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 ###############################################################################
 # iTerm2 (MacOS) 
