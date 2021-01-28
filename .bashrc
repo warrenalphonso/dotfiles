@@ -118,7 +118,16 @@ fi
 # 
 # See pyenv commands here: https://github.com/pyenv/pyenv/blob/master/COMMANDS.md
 # For Jupyter notebook, do: pip install ipykernel and brew install jupyter
+# Make sure `jupyter kernelspec list` has Python pointing to pyenv's Python. 
 
+# Unnecessary if installed via Brew
+if \[ $machine == "Linux" \]; then 
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+fi
+
+# Enable shim and autocomplete 
+# This manipulates PATH so keep it close to end of .bashrc.
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 else 
@@ -171,3 +180,4 @@ fi
 # Clean up
 
 unset machine
+
