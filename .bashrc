@@ -166,7 +166,8 @@ fi
 # Check for tmux addons 
 # &> redirects output to "blackhole" /dev/null. This command is 0 on success 
 # and 1 on error (tmux-mem-cpu-load doesn't exist). 
-if \[ which tmux-mem-cpu-load &> /dev/null \]; then 
+# command -v checks if command exists: https://stackoverflow.com/a/677212/13697995
+if ! command -v tmux-mem-cpu-load &> /dev/null; then
     echo "Cannot find tmux-mem-cpu-load command! Install it with Homebrew or \ 
 	from here: https://github.com/thewtex/tmux-mem-cpu-load"
 fi
