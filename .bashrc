@@ -88,20 +88,6 @@ for option in autocd globstar; do
 done
 unset option
 
-# HomeBrew autocompletes for MacOS. 
-# There's probably a way to get something similar to work on Ubuntu too. For 
-# example, see: 
-# https://github.com/alrra/dotfiles/blob/main/src/shell/ubuntu/bash_autocomplete
-# Add tab completion for many Bash commands
-if \[ $machine == "Mac" \] && which brew &> /dev/null \
-	&& [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
-    # Ensure existing Homebrew v1 completions continue to work
-    export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
-    source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-elif [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion
-fi
-
 ###############################################################################
 # Python Setup 
 # 
@@ -174,6 +160,15 @@ if \[ -f $HOME/.iterm2_shell_integration.bash \]; then
 elif \[ $machine == "Mac" \]; then 
     echo "Cannot find $HOME/.iterm2_shell_integration.bash! \
 	See: https://iterm2.com/documentation-shell-integration.html"
+fi
+
+###############################################################################
+# Check for tmux addons 
+# &> redirects output to "blackhole" /dev/null. This command is 0 on success 
+# and 1 on error (tmux-mem-cpu-load doesn't exist). 
+if \[ which tmux-mem-cpu-load &> /dev/null \]; then 
+    echo "Cannot find tmux-mem-cpu-load command! Install it with Homebrew or \ 
+	from here: https://github.com/thewtex/tmux-mem-cpu-load"
 fi
 
 ###############################################################################
