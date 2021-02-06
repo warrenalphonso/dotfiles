@@ -171,10 +171,9 @@ fi
 # command -v checks if command exists: https://stackoverflow.com/a/677212/13697995
 if ! command -v tmux &> /dev/null; then 
     echo "Cannot find tmux! Please install it."
-# elif [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] \
-elif [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && 
-	[ -z "$TMUX" ]; then
-    tmux new-session -A -s main # See: https://unix.stackexchange.com/a/176885
+# elif [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && 
+# 	[ -z "$TMUX" ]; then
+#     tmux new-session -A -s main # See: https://unix.stackexchange.com/a/176885
 fi
 
 # Check for tmux-mem-cpu-load addon
