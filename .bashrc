@@ -163,6 +163,15 @@ elif \[ $machine == "Mac" \]; then
 fi
 
 ###############################################################################
+# Colorful ls (MacOS) 
+# Find `ls` to `ls -G` to have directories be different colors. 
+if \[ $machine == "Mac" \]; then 
+    function ls() {
+	command ls -G 
+    }
+fi
+
+###############################################################################
 # tmux
 
 # Start tmux on every shell login. See: https://unix.stackexchange.com/a/113768
