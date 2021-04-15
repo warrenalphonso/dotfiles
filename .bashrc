@@ -103,8 +103,10 @@ unset option
 # a local Python version for the current directory with: pyenv local 3.9.1
 # 
 # See pyenv commands here: https://github.com/pyenv/pyenv/blob/master/COMMANDS.md
-# For Jupyter notebook, do: pip install ipykernel and brew install jupyter
+# For Jupyter notebook, do: pip install ipykernel, brew install jupyter, and 
+# pip install jupyter. 
 # Make sure `jupyter kernelspec list` has Python pointing to pyenv's Python. 
+# See: https://albertauyeung.github.io/2020/08/17/pyenv-jupyter.html
 
 # Unnecessary if installed via Brew
 if \[ $machine == "Linux" \]; then 
