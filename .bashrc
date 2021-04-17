@@ -168,9 +168,7 @@ fi
 # Colorful ls (MacOS) 
 # Find `ls` to `ls -G` to have directories be different colors. 
 if \[ $machine == "Mac" \]; then 
-    function ls() {
-	command ls -G 
-    }
+    export CLICOLOR=1
 fi
 
 ###############################################################################
