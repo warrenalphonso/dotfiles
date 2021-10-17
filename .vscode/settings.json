@@ -1,0 +1,28 @@
+{
+    // Base editor settings
+    "editor.rulers": [
+        80
+    ],
+    "editor.formatOnSave": true,
+    "window.zoomLevel": -1,
+    "workbench.colorTheme": "Nord",
+    "workbench.startupEditor": "none",
+    "terminal.explorerKind": "external",
+    // IPython Notebook settings
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    // Python settings
+    "python.languageServer": "Pylance",
+    "python.linting.mypyEnabled": true,
+    "python.linting.mypyPath": "${env:HOME}/.pyenv/shims/mypy",
+    "python.linting.pylintEnabled": false,
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "${env:HOME}/.pyenv/shims/black",
+    // Markdown settings
+    "markdown.extension.toc.updateOnSave": false,
+}

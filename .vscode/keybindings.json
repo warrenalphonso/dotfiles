@@ -1,0 +1,11 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "shift+enter",
+        "command": "editor.action.peekDeclaration"
+    },
+    {
+        "key": "shift+cmd+enter",
+        "command": "editor.action.goToDeclaration"
+    }
+]
