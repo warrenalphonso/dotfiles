@@ -118,30 +118,11 @@ fi
 # This manipulates PATH so keep it close to end of .bashrc.
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
+    # pyenv v2 doesn't automatically set PATH on init -
+    eval "$(pyenv init --path)"
 else 
     echo pyenv is not installed!
 fi
-
-###############################################################################
-# Rust Setup 
-
-export PATH="$HOME/.cargo/bin:$PATH"
-
-# Compile Rust file, save to build/ directory, and run
-function rrun() {
-    rustc --out-dir build $1
-    ./build/${1%.rs}
-}
-
-###############################################################################
-# React Native Setup 
-
-# Android SDK 
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 ###############################################################################
 # Track dotfiles with Git 
