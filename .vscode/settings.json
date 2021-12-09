@@ -4,7 +4,6 @@
         80
     ],
     "editor.formatOnSave": true,
-    "window.zoomLevel": -1,
     "workbench.colorTheme": "Nord",
     "workbench.startupEditor": "none",
     "terminal.explorerKind": "external",
@@ -25,4 +24,7 @@
     "python.formatting.blackPath": "${env:HOME}/.pyenv/shims/black",
     // Markdown settings
     "markdown.extension.toc.updateOnSave": false,
+    "window.zoomLevel": -1,
+    "editor.cursorBlinking": "phase",
+    "editor.cursorSmoothCaretAnimation": true,
 }
