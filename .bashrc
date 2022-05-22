@@ -147,7 +147,6 @@ fi
 
 ###############################################################################
 # Colorful ls (MacOS) 
-# Find `ls` to `ls -G` to have directories be different colors. 
 if \[ $machine == "Mac" \]; then 
     export CLICOLOR=1
 fi
@@ -171,6 +170,10 @@ if ! command -v tmux-mem-cpu-load &> /dev/null; then
     echo "Cannot find tmux-mem-cpu-load command! Install it with Homebrew or \ 
 	from here: https://github.com/thewtex/tmux-mem-cpu-load"
 fi
+
+###############################################################################
+# Zoxide 
+eval "$(zoxide init bash)"
 
 ###############################################################################
 # Clean up
