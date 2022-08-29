@@ -12,5 +12,3 @@ if \[ -f $HOME/.bashrc \]; then
 else
     echo Cannot find $HOME/.bashrc file! 
 fi
-
-export PATH="$HOME/.poetry/bin:$PATH"

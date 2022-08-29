@@ -124,26 +124,14 @@ else
     echo pyenv is not installed!
 fi
 
+# Add Poetry to PATH
+export PATH="$HOME/.local/bin:$PATH"
+
 ###############################################################################
 # Track dotfiles with Git 
 
 # dotfiles points to $HOME/.dotfiles Git repo 
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-
-###############################################################################
-# iTerm2 (MacOS) 
-# We've got to enable shell integration so that iTerm2 can track command 
-# history, working directory, host name, etc. 
-# IMPORTANT: This should be at the end of .bash_profile (.bashrc is fine because 
-# we source it from .bash_profile) because other scripts might overwrite the 
-# settings it needs, such as `PROMPT_COMMAND`. 
-# See: https://iterm2.com/documentation-shell-integration.html
-if \[ -f $HOME/.iterm2_shell_integration.bash \]; then 
-    source $HOME/.iterm2_shell_integration.bash
-elif \[ $machine == "Mac" \]; then 
-    echo "Cannot find $HOME/.iterm2_shell_integration.bash! \
-	See: https://iterm2.com/documentation-shell-integration.html"
-fi
 
 ###############################################################################
 # Colorful ls (MacOS) 
@@ -172,11 +160,32 @@ if ! command -v tmux-mem-cpu-load &> /dev/null; then
 fi
 
 ###############################################################################
+
 # Zoxide 
 eval "$(zoxide init bash)"
+
+# fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Rust
+. "$HOME/.cargo/env"
+
+###############################################################################
+# iTerm2 (MacOS) 
+# We've got to enable shell integration so that iTerm2 can track command 
+# history, working directory, host name, etc. 
+# IMPORTANT: This should be at the end of .bash_profile (.bashrc is fine because 
+# we source it from .bash_profile) because other scripts might overwrite the 
+# settings it needs, such as `PROMPT_COMMAND`. 
+# See: https://iterm2.com/documentation-shell-integration.html
+if \[ -f $HOME/.iterm2_shell_integration.bash \]; then 
+    source $HOME/.iterm2_shell_integration.bash
+elif \[ $machine == "Mac" \]; then 
+    echo "Cannot find $HOME/.iterm2_shell_integration.bash! \
+	See: https://iterm2.com/documentation-shell-integration.html"
+fi
 
 ###############################################################################
 # Clean up
 
 unset machine
-
