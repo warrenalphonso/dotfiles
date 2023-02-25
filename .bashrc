@@ -117,8 +117,7 @@ fi
 # Enable shim and autocomplete 
 # This manipulates PATH so keep it close to end of .bashrc.
 if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-    # pyenv v2 doesn't automatically set PATH on init -
+    # Enable shims without shell integration because it's slow
     eval "$(pyenv init --path)"
 else 
     echo pyenv is not installed!
