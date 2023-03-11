@@ -130,7 +130,15 @@ export PATH="$HOME/.local/bin:$PATH"
 # Track dotfiles with Git 
 
 # dotfiles points to $HOME/.dotfiles Git repo 
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
+# re-attempt previous commit
+# From: https://unix.stackexchange.com/a/590225
+recommit () {
+    local gitdir=$(git rev-parse --git-dir)
+    local inprogress_commit_message=$(cat "$gitdir/COMMIT_EDITMSG")
+    git commit -m "$inprogress_commit_message" "$@"
+}
 
 ###############################################################################
 # Colorful ls (MacOS) 
