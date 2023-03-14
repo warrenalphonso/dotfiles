@@ -89,6 +89,23 @@ done
 unset option
 
 ###############################################################################
+# Shell history 
+
+# All shells should append to ~/.bash_history before running the command.
+# Default behavior is to save history after terminal logs out.
+shopt -s histappend
+# Save 5,000 lines of history in memory
+HISTSIZE=10000
+# Save 2,000,000 lines of history to disk (will have to grep ~/.bash_history for full listing)
+HISTFILESIZE=2000000
+# Ignore redundant or space commands
+HISTCONTROL=ignoreboth
+# Ignore more
+HISTIGNORE='ls:ll:ls -alh:pwd:clear:history'
+# Set time format
+HISTTIMEFORMAT='%F %T '
+
+###############################################################################
 # Python Setup 
 # 
 # MacOS (currently) ships with Python 2.7 (`python` alias) and XCode ships with 
