@@ -91,17 +91,18 @@ unset option
 ###############################################################################
 # Shell history 
 
-# All shells should append to ~/.bash_history before running the command.
-# Default behavior is to save history after terminal logs out.
+# All shells should append to ~/.bash_history.
 shopt -s histappend
+# PROMPT_COMMAND prepends every command. This appends to ~/.bash_history after
+# each command instead of only doing so when the shell exits.
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
 # Save 5,000 lines of history in memory
 HISTSIZE=10000
 # Save 2,000,000 lines of history to disk (will have to grep ~/.bash_history for full listing)
 HISTFILESIZE=2000000
 # Ignore redundant or space commands
 HISTCONTROL=ignoreboth
-# Ignore more
-HISTIGNORE='ls:ll:ls -alh:pwd:clear:history'
 # Set time format
 HISTTIMEFORMAT='%F %T '
 
