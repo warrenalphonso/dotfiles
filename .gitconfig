@@ -1,0 +1,60 @@
+# Lots of these are from https://github.com/mathiasbynens/dotfiles
+
+[alias]
+# Git logs with abbreviated commit hash, description, date, and author
+# Format placeholders used:
+# - %C(...): color specification
+# - %h     : abbreviated commit hash
+# - %ar    : author date, relative
+# - %s     : commit message subject
+# - %an    : author name
+# - %d     : ref name
+l = log --graph --abbrev-commit --decorate=auto --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+
+# View the current working tree status using the short format.
+s = status
+
+# Commit
+c = commit
+
+# Amend the currently staged files to the latest commit.
+amend = commit --amend
+
+# Change branch
+co = checkout
+
+# Show the diff between the latest commit and the current state.
+d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+# `git di $number` shows the diff between the state `$number` revisions ago and the current state.
+di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+# Pull in remote changes for the current repository and all its submodules.
+p = pull --recurse-submodules
+
+# Find commits by source code
+fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+# Find commits by commit message
+fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+# Show the user email for the current repository.
+whoami = config user.email
+
+# List aliases.
+aliases = config --get-regexp alias
+
+[branch]
+# Show most recently changed branches first.
+sort = -committerdate
+
+[core]
+excludesfile = ~/.gitignore_global
+
+[help]
+# Automatically correct and execute mistyped commands.
+autocorrect = 1
+
+[include]
+# Keep personal global configuration in this file and keep it out of VCS
+path = ~/.gitconfig.local
