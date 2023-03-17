@@ -67,14 +67,12 @@ case "$(uname -s)" in
 esac 
 
 ###############################################################################
+# Filesystem niceties
 # From: https://github.com/mathiasbynens/dotfiles
 
 # Case-insensitive globbing (used in pathname expansion)
 # See: https://unix.stackexchange.com/a/16519
 shopt -s nocaseglob 
-
-# Append to the Bash history file, rather than overwriting it
-shopt -s histappend
 
 # Autocorrect typos in path names when using `cd`
 # See: https://linux.101hacks.com/cd-command/shopt-s-cdspell/
