@@ -58,3 +58,8 @@ autocorrect = 1
 [include]
 # Keep personal global configuration in this file and keep it out of VCS
 path = ~/.gitconfig.local
+
+# https://difftastic.wilfred.me.uk/git.html
+[diff]
+external = difft
+
