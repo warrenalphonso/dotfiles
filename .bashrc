@@ -148,6 +148,11 @@ export PATH="$HOME/.local/bin:$PATH"
 # dotfiles points to $HOME/.dotfiles Git repo 
 alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
+###############################################################################
+# Git
+
+alias g="git"
+
 # re-attempt previous commit
 # From: https://unix.stackexchange.com/a/590225
 recommit () {
