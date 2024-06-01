@@ -141,10 +141,11 @@ fi
 
 export PATH="$HOME/.local/bin:$PATH"
 
-# Automatically activate virtual environments when changing directories
-# (I might want to revert this if it slows down `cd` too much or becomes magic.)
+# Automatically (de)activate virtual environments before each prompt
+# (I might want to revert this if it slows down the terminal too much or becomes magic.)
 # Copied from: https://stackoverflow.com/a/50830617
 # Assumes virtual environments are stored under .venv/
+# Why not overwrite `cd`? Because other comands also change directories, eg Zoxide.
 activate_venv() {
     # Background: VIRTUAL_ENV is set by the .venv/bin/activate script to .venv directory
     # If VIRTUAL_ENV is null and ./venv exists
@@ -167,9 +168,7 @@ activate_venv() {
     fi
 }
 
-cd() {
-    builtin cd "$@" && activate_venv
-}
+export PROMPT_COMMAND="activate_venv; $PROMPT_COMMAND"
 
 ###############################################################################
 # Track dotfiles with Git 
