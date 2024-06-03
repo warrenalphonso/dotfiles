@@ -148,13 +148,6 @@ export PATH="$HOME/.local/bin:$PATH"
 # Why not overwrite `cd`? Because other comands also change directories, eg Zoxide.
 activate_venv() {
     # Background: VIRTUAL_ENV is set by the .venv/bin/activate script to .venv directory
-    # If VIRTUAL_ENV is null and ./venv exists
-    if [[ -z "$VIRTUAL_ENV" ]] && [[ -d ./.venv ]]; then
-        echo "Sourcing .venv/bin/activate"
-        source ./.venv/bin/activate
-        return
-    fi
-
     # If VIRTUAL_ENV isn't null and current directory isn't a subdirectory of
     # a directory that contains a virtual environment, deactivate it
     if [[ -n "$VIRTUAL_ENV" ]]; then
@@ -165,6 +158,13 @@ activate_venv() {
             echo "Deactivating venv"
             deactivate
         fi
+    fi
+
+    # If VIRTUAL_ENV is null and ./venv exists
+    if [[ -z "$VIRTUAL_ENV" ]] && [[ -d ./.venv ]]; then
+        echo "Sourcing .venv/bin/activate"
+        source ./.venv/bin/activate
+        return
     fi
 }
 
