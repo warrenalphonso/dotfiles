@@ -35,18 +35,4 @@ else
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
-" Install PlugInstall if not already installed 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-"call plug#begin('~/.config/nvim')
-call plug#begin('~/.vim/plugged')
-Plug 'iCyMind/NeoSolarized'
-call plug#end()
-
-" Solarized dark colorscheme 
 syntax enable
-colorscheme NeoSolarized
