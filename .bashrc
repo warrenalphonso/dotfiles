@@ -66,6 +66,12 @@ case "$(uname -s)" in
     *)          machine="Unknown:$(uname -s)"
 esac 
 
+# Set up Homebrew
+if \[ $machine == "Mac" \]; then 
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    export BASH_SILENCE_DEPRECATION_WARNING=1
+fi
+
 ###############################################################################
 # Filesystem niceties
 # From: https://github.com/mathiasbynens/dotfiles
@@ -139,7 +145,7 @@ else
     echo pyenv is not installed!
 fi
 
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
 
 # Automatically (de)activate virtual environments before each prompt
 # (I might want to revert this if it slows down the terminal too much or becomes magic.)
