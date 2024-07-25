@@ -28,12 +28,7 @@
 #
 # In MacOS, the Terminal app ALWAYS runs as a login shell! 
 # See: https://scriptingosx.com/2017/04/about-bash_profile-and-bashrc-on-macos/
-# In tmux, all new windows are login shells also! 
-# See: https://superuser.com/a/970847
 #
-# I use the iTerm2 terminal, and I've also set it to ALWAYS run as a login 
-# shell to avoid confusion. See: https://stackoverflow.com/a/25025999/13697995
-# 
 # The distinction between login shells and non-login shells is the dotfile 
 # they load. Login shells load .bash_profile while non-login shells load 
 # .bashrc. 
@@ -202,26 +197,6 @@ if \[ $machine == "Mac" \]; then
 fi
 
 ###############################################################################
-# tmux
-
-# Start tmux on every shell login. See: https://unix.stackexchange.com/a/113768
-# &> redirects output to "blackhole" /dev/null. This command is 0 on success 
-# and 1 on error (tmux-mem-cpu-load doesn't exist). 
-# command -v checks if command exists: https://stackoverflow.com/a/677212/13697995
-if ! command -v tmux &> /dev/null; then 
-    echo "Cannot find tmux! Please install it."
-# elif [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && 
-# 	[ -z "$TMUX" ]; then
-#     tmux new-session -A -s main # See: https://unix.stackexchange.com/a/176885
-fi
-
-# Check for tmux-mem-cpu-load addon
-if ! command -v tmux-mem-cpu-load &> /dev/null; then
-    echo "Cannot find tmux-mem-cpu-load command! Install it with Homebrew or \ 
-	from here: https://github.com/thewtex/tmux-mem-cpu-load"
-fi
-
-###############################################################################
 
 # Zoxide 
 eval "$(zoxide init bash)"
@@ -231,21 +206,6 @@ eval "$(zoxide init bash)"
 
 # Rust
 . "$HOME/.cargo/env"
-
-###############################################################################
-# iTerm2 (MacOS) 
-# We've got to enable shell integration so that iTerm2 can track command 
-# history, working directory, host name, etc. 
-# IMPORTANT: This should be at the end of .bash_profile (.bashrc is fine because 
-# we source it from .bash_profile) because other scripts might overwrite the 
-# settings it needs, such as `PROMPT_COMMAND`. 
-# See: https://iterm2.com/documentation-shell-integration.html
-if \[ -f $HOME/.iterm2_shell_integration.bash \]; then 
-    source $HOME/.iterm2_shell_integration.bash
-elif \[ $machine == "Mac" \]; then 
-    echo "Cannot find $HOME/.iterm2_shell_integration.bash! \
-	See: https://iterm2.com/documentation-shell-integration.html"
-fi
 
 ###############################################################################
 # Clean up

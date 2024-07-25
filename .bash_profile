@@ -12,3 +12,4 @@ if \[ -f $HOME/.bashrc \]; then
 else
     echo Cannot find $HOME/.bashrc file! 
 fi
+. "$HOME/.cargo/env"
