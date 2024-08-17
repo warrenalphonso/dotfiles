@@ -197,7 +197,6 @@ if \[ $machine == "Mac" \]; then
 fi
 
 ###############################################################################
-
 # Zoxide 
 eval "$(zoxide init bash)"
 
@@ -206,6 +205,15 @@ eval "$(zoxide init bash)"
 
 # Rust
 . "$HOME/.cargo/env"
+
+###############################################################################
+# Bindings for Readline library functions: https://tiswww.case.edu/php/chet/readline/rltop.html
+# The terminal multiplexer you're using should send these escape codes to Bash,
+# which then uses the Readline library to modify the cursor.
+# If you're using Kitty, see kitty.conf or `kitten show-key -m kitty` to see what
+# escape codes the keys are sending.
+bind '"\e[1;3D": backward-word'
+bind '"\e[1;3C": forward-word'
 
 ###############################################################################
 # Clean up
