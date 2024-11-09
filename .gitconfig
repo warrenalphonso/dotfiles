@@ -50,6 +50,7 @@ sort = -committerdate
 
 [core]
 excludesfile = ~/.gitignore_global
+attributesfile = ~/.gitattributes
 
 [help]
 # Automatically correct and execute mistyped commands.
@@ -63,3 +64,6 @@ path = ~/.gitconfig.local
 [diff]
 external = difft
 
+[merge "mergiraf"]
+name = mergiraf
+driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P
