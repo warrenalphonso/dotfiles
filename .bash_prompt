@@ -106,8 +106,6 @@ set_prompts() {
     PS1="\[\033]0;\W\007\]" # Terminal title and prompt 
     PS1+="$reset\n"    # Newline
     PS1+="$userStyle\u"     # Username
-    PS1+="$white @ "
-    PS1+="$hostStyle\h"     # Host
     PS1+="$white in "
     PS1+="$green\w"         # Working directory full path 
     PS1+="\$(get_git_repository_details \"$white on $magenta\" \"$blue\")"
