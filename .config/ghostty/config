@@ -1,1 +1,3 @@
 theme = nord
+
+window-inherit-working-directory = false
