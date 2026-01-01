@@ -2,3 +2,4 @@ llm
 strip-tags
 symbex
 ttok
+skypilot[aws,gcp,lambda,paperspace]

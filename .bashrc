@@ -142,35 +142,6 @@ fi
 
 export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
 
-# Automatically (de)activate virtual environments before each prompt
-# (I might want to revert this if it slows down the terminal too much or becomes magic.)
-# Copied from: https://stackoverflow.com/a/50830617
-# Assumes virtual environments are stored under .venv/
-# Why not overwrite `cd`? Because other comands also change directories, eg Zoxide.
-activate_venv() {
-    # Background: VIRTUAL_ENV is set by the .venv/bin/activate script to .venv directory
-    # If VIRTUAL_ENV isn't null and current directory isn't a subdirectory of
-    # a directory that contains a virtual environment, deactivate it
-    if [[ -n "$VIRTUAL_ENV" ]]; then
-        # Get parent of .venv. Eg ~/foo/.venv -> ~/.foo
-        parentdir="$(dirname "$VIRTUAL_ENV")"
-        # Check that current directory is not subdirectory of parentdir (* matches anything)
-        if [[ "$PWD"/ != "$parentdir"/* ]]; then
-            echo "Deactivating venv"
-            deactivate
-        fi
-    fi
-
-    # If VIRTUAL_ENV is null and ./venv exists
-    if [[ -z "$VIRTUAL_ENV" ]] && [[ -d ./.venv ]]; then
-        echo "Sourcing .venv/bin/activate"
-        source ./.venv/bin/activate
-        return
-    fi
-}
-
-export PROMPT_COMMAND="activate_venv; $PROMPT_COMMAND"
-
 ###############################################################################
 # Track dotfiles with Git 
 

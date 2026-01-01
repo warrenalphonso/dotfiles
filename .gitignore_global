@@ -10,6 +10,9 @@
 # - Jupyter Notebook: https://github.com/github/gitignore/blob/master/community/Python/JupyterNotebooks.gitignore
 
 ###############################################################################
+scratch
+.claude
+
 # MacOS: https://github.com/github/gitignore/blob/master/Global/macOS.gitignore
 
 # General
