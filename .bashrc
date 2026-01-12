@@ -153,13 +153,7 @@ alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 alias g="git"
 
-# re-attempt previous commit
-# From: https://unix.stackexchange.com/a/590225
-recommit () {
-    local gitdir=$(git rev-parse --git-dir)
-    local inprogress_commit_message=$(cat "$gitdir/COMMIT_EDITMSG")
-    git commit -m "$inprogress_commit_message" "$@"
-}
+GIT_TOKEN=$(gh auth token 2>/dev/null) && export GIT_TOKEN
 
 ###############################################################################
 # Colorful ls (MacOS) 

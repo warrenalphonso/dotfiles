@@ -5,8 +5,6 @@
 # 
 # This uses the ANSI colors set by your terminal.
 # See this post for an overview: https://chrisyeh96.github.io/2020/03/28/terminal-colors.html
-# I recommend using the Nord.itermcolors theme with iTerm in my dotfiles repo. 
-# Set it in iTerm's Preferences -> Profiles -> Colors -> Color Presets.
 # 
 # The git prompts are mostly copied from: https://github.com/alrra/dotfiles
 # Some bits and pieces from: https://github.com/mathiasbynens/dotfiles 
