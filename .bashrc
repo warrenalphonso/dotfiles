@@ -142,6 +142,9 @@ fi
 
 export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
 
+# Go
+export PATH="$HOME/go/bin:$PATH"
+
 ###############################################################################
 # Track dotfiles with Git 
 

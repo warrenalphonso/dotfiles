@@ -25,7 +25,18 @@
     ]
   },
   "alwaysThinkingEnabled": true,
-  "enabledPlugins": {
-    "ralph-loop@claude-plugins-official": true
+  "effortLevel": "low",
+  "sandbox": {
+    "enabled": true,
+    "network": {
+      "allowLocalBinding": true,
+      "allowedDomains": ["*"]
+    },
+    "enableWeakerNetworkIsolation": true
+  },
+  "permissions": {
+    "allow": [
+      "WebFetch"
+    ]
   }
 }
