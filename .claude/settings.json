@@ -1,4 +1,9 @@
 {
+  "permissions": {
+    "allow": [
+      "WebFetch"
+    ]
+  },
   "model": "opus",
   "hooks": {
     "Notification": [
@@ -7,7 +12,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "printf '\\a' > /dev/tty"
+            "command": "printf '{\"terminalSequence\":\"\\\\u0007\"}'"
           }
         ]
       }
@@ -18,25 +23,22 @@
         "hooks": [
           {
             "type": "command",
-            "command": "printf '\\a' > /dev/tty"
+            "command": "printf '{\"terminalSequence\":\"\\\\u0007\"}'"
           }
         ]
       }
     ]
   },
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "low",
   "sandbox": {
     "enabled": true,
     "network": {
-      "allowLocalBinding": true,
-      "allowedDomains": ["*"]
+      "allowedDomains": [
+        "*"
+      ],
+      "allowLocalBinding": true
     },
     "enableWeakerNetworkIsolation": true
   },
-  "permissions": {
-    "allow": [
-      "WebFetch"
-    ]
-  }
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "low"
 }
