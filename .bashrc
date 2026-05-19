@@ -94,7 +94,6 @@ unset option
 shopt -s histappend
 # PROMPT_COMMAND prepends every command. This appends to ~/.bash_history after
 # each command instead of only doing so when the shell exits.
-export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 PROMPT_COMMAND+=("history -a")
 PROMPT_COMMAND+=('[ $SECONDS -gt 5 ] && printf "\a"; SECONDS=0')
 
