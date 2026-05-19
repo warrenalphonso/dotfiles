@@ -40,5 +40,6 @@
     "enableWeakerNetworkIsolation": true
   },
   "alwaysThinkingEnabled": true,
+  "skipAutoPermissionPrompt": true,
   "effortLevel": "low"
 }
