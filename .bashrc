@@ -107,46 +107,6 @@ HISTCONTROL=ignoreboth
 HISTTIMEFORMAT='%F %T '
 
 ###############################################################################
-# Python Setup 
-# 
-# MacOS (currently) ships with Python 2.7 (`python` alias) and XCode ships with 
-# Python 3.9 (`python3` alias). We don't want to rely on these because they'll 
-# change with system updates!
-# 
-# We'll use pyenv to manage Python versions. 
-# For setup, see: https://github.com/pyenv/pyenv/wiki
-#
-# With pyenv, we can easily install and switch between different Python versions. 
-# We can set a global Python version with: pyenv global 3.9.1 , or we can set
-# a local Python version for the current directory with: pyenv local 3.9.1
-# 
-# See pyenv commands here: https://github.com/pyenv/pyenv/blob/master/COMMANDS.md
-# For Jupyter notebook, do: pip install ipykernel, brew install jupyter, and 
-# pip install jupyter. 
-# Make sure `jupyter kernelspec list` has Python pointing to pyenv's Python. 
-# See: https://albertauyeung.github.io/2020/08/17/pyenv-jupyter.html
-
-# Unnecessary if installed via Brew
-if \[ $machine == "Linux" \]; then 
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-fi
-
-# Enable shim and autocomplete 
-# This manipulates PATH so keep it close to end of .bashrc.
-if command -v pyenv 1>/dev/null 2>&1; then
-    # Enable shims without shell integration because it's slow
-    eval "$(pyenv init --path)"
-else 
-    echo pyenv is not installed!
-fi
-
-export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
-
-# Go
-export PATH="$HOME/go/bin:$PATH"
-
-###############################################################################
 # Track dotfiles with Git 
 
 # dotfiles points to $HOME/.dotfiles Git repo 
@@ -166,6 +126,8 @@ if \[ $machine == "Mac" \]; then
 fi
 
 ###############################################################################
+export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
+
 # Zoxide 
 eval "$(zoxide init bash)"
 
@@ -173,7 +135,10 @@ eval "$(zoxide init bash)"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Rust
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+# Go
+export PATH="$HOME/go/bin:$PATH"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
