@@ -29,17 +29,7 @@
       }
     ]
   },
-  "sandbox": {
-    "enabled": true,
-    "network": {
-      "allowedDomains": [
-        "*"
-      ],
-      "allowLocalBinding": true
-    },
-    "enableWeakerNetworkIsolation": true
-  },
   "alwaysThinkingEnabled": true,
-  "skipAutoPermissionPrompt": true,
-  "effortLevel": "low"
+  "effortLevel": "medium",
+  "skipDangerousModePermissionPrompt": true
 }
