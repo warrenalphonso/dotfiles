@@ -64,6 +64,7 @@ esac
 # Set up Homebrew
 if \[ $machine == "Mac" \]; then 
     eval "$(/opt/homebrew/bin/brew shellenv)"
+    export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
     export BASH_SILENCE_DEPRECATION_WARNING=1
 fi
 
