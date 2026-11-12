@@ -145,6 +145,11 @@ export PATH="$HOME/go/bin:$PATH"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# VS Code `code` CLI (installed to ~/Applications via HOMEBREW_CASK_OPTS)
+VSCODE_BIN="$HOME/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+[ -d "$VSCODE_BIN" ] && export PATH="$PATH:$VSCODE_BIN"
+unset VSCODE_BIN
+
 ###############################################################################
 # Clean up
 
